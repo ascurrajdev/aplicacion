@@ -1,0 +1,66 @@
+<div class="main-container">
+  <mat-card>
+    <mat-card-content>
+      <h2 class="text-center">Ingrese los datos para iniciar la aplicación.</h2>
+      <div class="card-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()" #formElement="ngForm">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field>
+                        <input matInput placeholder="Proyecto" formControlName="project" required>
+                    </mat-form-field>
+                    <div *ngIf="loginForm.controls.project.invalid && (loginForm.controls.project.dirty || loginForm.controls.project.touched)">
+                        <span class="validation-error">{{ showErrors(loginForm.controls.project.errors) }}</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <mat-form-field>
+                        <input matInput placeholder="Inversión" formControlName="investment" required>
+                    </mat-form-field>
+                    <div *ngIf="loginForm.controls.investment.invalid && (loginForm.controls.investment.dirty || loginForm.controls.investment.touched)">
+                        <span class="validation-error">{{ showErrors(loginForm.controls.investment.errors) }}</span>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field>
+                        <input matInput placeholder="Tasa" formControlName="rate" required>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <div *ngIf="loginForm.controls.rate.invalid && (loginForm.controls.rate.dirty || loginForm.controls.rate.touched)">
+                        <span class="validation-error">{{ showErrors(loginForm.controls.rate.errors) }}</span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <mat-form-field>
+                        <input matInput placeholder="Años" formControlName="years" required>
+                    </mat-form-field>
+                    <div *ngIf="loginForm.controls.years.invalid && (loginForm.controls.years.dirty || loginForm.controls.years.touched)">
+                        <span class="validation-error">{{ showErrors(loginForm.controls.years.errors) }}</span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <mat-form-field>
+                        <mat-select id="currency_id" formControlName="currency_id" placeholder="Moneda">
+                            <mat-option [value]="1">$</mat-option>
+                            <mat-option [value]="2">₲</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col text-center">
+                    <button mat-raised-button class="mr-2" color="primary" [disabled]="!loginForm.valid">Guardar</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

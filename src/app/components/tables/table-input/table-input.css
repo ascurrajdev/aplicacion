@@ -1,0 +1,43 @@
+div.main-container {
+  width: 100%;
+}
+
+div.main-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+div.prefix {
+  width: 20%;
+  display: inline-block;
+}
+
+div.input-container {
+  width: 80%;
+  display: inline-block;
+}
+
+input[type="text"] {
+  border: none;
+  width: 100%;
+  /* width: auto; */
+  font-weight: bold;
+  text-align: right;
+}
+
+input[type="text"]::placeholder {
+  text-align: right;
+}
+
+input[type="text"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  text-align: right;
+}
+input[type="text"]::-moz-placeholder { /* Firefox 19+ */
+  text-align: right;
+}
+input[type="text"]:-ms-input-placeholder { /* IE 10+ */
+  text-align: right;
+}
+input[type="text"]:-moz-placeholder { /* Firefox 18- */
+  text-align: right;
+}

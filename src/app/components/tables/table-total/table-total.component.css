@@ -1,0 +1,50 @@
+div.main-container {
+  width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table > thead > tr > th, table > tbody td {
+  width: 90px;
+}
+
+table > thead > tr > th{
+  text-align: center;
+  border: 1px solid #000;
+}
+
+table > thead > tr > th, table > tbody > tr > td.subject-cell {
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #40a8c4;
+  padding: 0px 3px;
+}
+
+table > tbody > tr > td:first-child {
+  border-left: 1px solid #000;
+}
+
+table > tbody > tr > td {
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+td.amount-cell {
+  text-align: right;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 0px 5px;
+}
+
+span.text-danger {
+  color: #ea4c4c;
+}
+
+span.text-success {
+  color: #1abb9c;
+}

@@ -1,0 +1,18 @@
+mat-card {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+div.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+span.validation-error {
+    color: #FF0000;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}

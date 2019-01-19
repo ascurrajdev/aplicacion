@@ -1,0 +1,27 @@
+<div class="main-container">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of table_headers">{{ header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="subject-cell">IVA</td>
+        <td *ngFor="let iva of ivas" class="amount-cell">{{ currencyFormat(iva.amount) }}</td>
+      </tr>
+      <tr>
+        <td class="subject-cell">Impuesto</td>
+        <td *ngFor="let tax of taxes" class="amount-cell">{{ currencyFormat(tax.amount) }}</td>
+      </tr>
+      <tr>
+        <td class="subject-cell">Saldo neto mensual</td>
+        <td *ngFor="let balance of monthlyBalance" class="amount-cell">{{ currencyFormat(balance.amount) }}</td>
+      </tr>
+      <tr>
+        <td class="subject-cell">Saldo acumulado</td>
+        <td *ngFor="let accumulated of accumalatedBalance" class="amount-cell"><span class="{{accumulated.amount < 0 ? 'text-danger' : 'text-success'}}">{{ currencyFormat(accumulated.amount) }}</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

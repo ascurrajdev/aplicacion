@@ -1,0 +1,121 @@
+<app-alert-info [alert]="alert" (close)="onAlertClose()" ></app-alert-info>
+<div class="main-container">
+    <div class="table-data">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let header of table_headers" class="subject-bg">{{ header }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of table_rows" [ngSwitch]="row.type">
+            <ng-container *ngSwitchCase="0">
+              <tr *ngIf="row.description != '';else separatorRow" class="row-header">
+                <td class="subject border-b">{{ row.description }}</td>
+                <td *ngFor="let m of months" class="border-b"></td>
+              </tr>
+              <ng-template #separatorRow>
+                <tr class="row-separator">
+                  <td attr.colspan="{{ months.length + 1 }}"></td>
+                </tr>
+              </ng-template>
+            </ng-container>
+            <tr *ngSwitchCase="-2" class="row-info">
+              <td class="border-r">{{ row.description }}</td>
+              <td *ngFor="let m of row.cells">
+                <div class="td-container">
+                  <div class="amount-wrapper">
+                    <div class="prefix-container">{{ sign }}</div>
+                    <div class="amount-container">{{ row.key === 0 ? getFiscalCredit(m) : getFiscalDebit(m) }}</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngSwitchCase="-1" class="row-total">
+              <td class="subject-bg border-r">{{ row.description }}</td>
+              <td *ngFor="let m of row.cells" class="subject-bg">
+                <div class="td-container">
+                  <div class="amount-wrapper">
+                    <div class="prefix-container">{{ sign }}</div>
+                    <div class="amount-container">{{ row.key === 0 ? getEgressMonthTotal(m) : getIncomeMonthTotal(m) }}</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngSwitchDefault class="row-input">
+              <td class="subject border-b border-l border-r">{{ row.description }}</td>
+              <td *ngFor="let input of row.inputs" class="border-b border-r">
+                <app-table-input *ngIf="row.key === 1; else egressInput" [sign]="sign" [type_id]="input.type_id" [month]="input.month" [html_id]="input.html_id" (didUpdate)="onIncomeUpdate($event)" (returnPushed)="onInputEnter($event)"></app-table-input>
+                <ng-template #egressInput>
+                    <app-table-input [sign]="sign" [type_id]="input.type_id" [month]="input.month" [html_id]="input.html_id" (didUpdate)="onEgressUpdate($event)" (returnPushed)="onInputEnter($event)"></app-table-input>
+                </ng-template>
+              </td>
+            </tr>
+          </ng-container>
+          <tr class="row-separator">
+            <td attr.colspan="{{ months.length + 1 }}"></td>
+          </tr>
+          <tr class="row-total">
+            <td class="subject-cell">IVA</td>
+            <td *ngFor="let iva of ivas">
+              <div class="td-container">
+                <div class="amount-wrapper">
+                  <div class="prefix-container">{{ sign }}</div>
+                  <div class="amount-container {{ iva.amount < 0 ? 'text-danger' : ''}}">{{ currencyFormat(absoluteNumber(iva.amount)) }}</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <!-- <tr class="row-total">
+            <td class="subject-cell">Impuesto</td>
+            <td *ngFor="let tax of taxes">
+              <div class="td-container">
+                <div class="amount-wrapper">
+                  <div class="prefix-container">{{ sign }}</div>
+                  <div class="amount-container">{{ currencyFormat(tax.amount) }}</div>
+                </div>
+              </div>
+            </td>
+          </tr> -->
+          <tr class="row-total">
+            <td class="subject-cell">Saldo neto mensual</td>
+            <td *ngFor="let balance of monthlyBalance">
+              <div class="td-container">
+                <div class="amount-wrapper">
+                  <div class="prefix-container">{{ sign }}</div>
+                  <div class="amount-container">{{ currencyFormat(balance.amount) }}</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="row-total">
+            <td class="subject-cell">Saldo acumulado</td>
+            <td *ngFor="let accumulated of accumalatedBalance">
+                <div class="td-container">
+                  <div class="amount-wrapper">
+                    <div class="prefix-container">{{ sign }}</div>
+                    <div class="amount-container {{accumulated.amount < 0 ? 'text-danger' : 'text-success'}}">
+                        {{ currencyFormat(accumulated.amount) }}
+                    </div>
+                  </div>
+                </div>
+            </td>
+          </tr>
+          <tr class="tax-row">
+              <td attr.colspan="{{ months.length - 1 }}"></td>
+              <td class="subject-bg border-l">Impuesto</td>
+              <td>
+                <div class="td-container">
+                  <div class="amount-wrapper">
+                    <div class="prefix-container"><b>{{ sign }}</b></div>
+                    <div class="amount-container">
+                      <input type="text" [(ngModel)]="annual_tax" class="input-annual-tax" placeholder="0.0" appNumericInput [onEnter]="onAnnualTaxEnter" (focusout)="annualTaxFocusOut()">
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

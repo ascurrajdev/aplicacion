@@ -1,0 +1,43 @@
+<app-alert-info [alert]="alert" (close)="alertClose()"></app-alert-info>
+<app-alert-confirm [alert]="alert_logout" (accept)="onLogout()" (cancel)="onCancelLogout()"></app-alert-confirm>
+<div class="main-container">
+  <mat-card class="project-name">
+    <div class="header-container">
+      <div class="title">
+        <h1>{{ project }}</h1>
+      </div>
+      <div class="subtitle">
+        <div class="investment-container">
+          Capital - Inversión: <strong>{{ titleCurrencyFormat(investment) }}</strong>&nbsp;{{ sign }}&nbsp;&nbsp;&nbsp;&nbsp;Costo de capital: <strong>{{ rate }}</strong>&nbsp;%
+        </div>
+        <div class="period-container">
+          Periodo: <strong>{{ years }}</strong> año{{ years > 1 ? 's' : '' }}
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <mat-accordion [multi]="accordion_multiple">
+    <mat-expansion-panel *ngFor="let by of business_years; let i = index" expanded="false" (opened)="onExpansion()">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Año {{ i + 1 }} </mat-panel-title>
+        <mat-panel-description>Flujo de caja</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+        <div fxLayout="row" fxLayoutAlign="space-around start">
+          <div fxFlex="100%">
+            <app-business-sheet [sign]="sign" [business_year]="by"></app-business-sheet>
+          </div>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="results-container">
+    <app-table-results [sign]="sign" [token]="token" [annual_flows]="annual_flows" [investment]="investment" [rate]="rate" (resultsShow)="resultsShow($event)"></app-table-results>
+  </div>
+
+  <div class="logout-container">
+    <button mat-raised-button color="warn" (click)="logoutRequest()">Salir</button>
+  </div>
+</div>

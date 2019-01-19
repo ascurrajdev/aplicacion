@@ -1,0 +1,24 @@
+div.title-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+div.logo-container{
+    width: 120px;
+    /* height: 100px; */
+}
+
+div.logo-container > img {
+    max-width: 100%;
+    border: 3px solid #cd4545;
+}
+
+h1.main-title {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  color: #FFFFFF;
+  margin-left: 3px;
+}

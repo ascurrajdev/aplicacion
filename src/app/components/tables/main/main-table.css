@@ -1,0 +1,142 @@
+* {box-sizing: border-box;}
+
+div.main-container {
+  overflow: auto;
+  /* max-height: 500px; */
+}
+
+table {
+  /* width: 100%; */
+  border-spacing: 0;
+  padding-right: 1px;
+}
+
+thead tr:nth-child(1) th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+div.table-data > table > thead > tr > th {
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+div.table-data > table > thead > tr > th:first-child { border-left: 1px solid #000; }
+
+div.table-data > table th:first-child { min-width: 150px; }
+
+div.table-data > table > tbody td:not(:first-child) {
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+div.table-data > table > tr.row-header > td:last-child { border-right: 1px solid #000; }
+div.table-data > table > tr.row-header > td:first-child { border-left: 1px solid #000; }
+
+th.bordered, td.bordered { border: 1px solid #000; }
+th.border-t, td.border-t { border-top: 1px solid #000; }
+th.border-r, td.border-r { border-right: 1px solid #000; }
+th.border-b, td.border-b { border-bottom: 1px solid #000; }
+th.border-l, td.border-l { border-left: 1px solid #000; }
+
+th.subject, td.subject {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+th.subject-bg, td.subject-bg {
+  font-weight: 500;
+  font-size: 12px;
+  background: url('/assets/img/bg.jpeg') no-repeat;
+}
+
+tr.row-separator > td {
+  min-height: 20px;
+  border-bottom: 1px solid #000;
+}
+
+tr.row-header > td:first-child {
+  font-weight: bold;
+  border-left: 1px solid #000;
+}
+
+tr.row-header > td:last-child { border-right: 1px solid #000; }
+
+tr.row-info > td {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  font-size: 12px;
+}
+
+tr.row-info > td:first-child {
+  border-left: 1px solid #000;
+  font-weight: bold;
+}
+
+tr.row-info > td:not(:first-child) {
+  text-align: right;
+  font-weight: 500;
+}
+
+tr.row-total td:first-child {
+  font-weight: bold;
+  font-size: 12px;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  background: url('/assets/img/bg.jpeg') no-repeat;
+}
+
+tr.row-total td:not(:first-child) {
+  text-align: right;
+  font-size: 12px;
+  font-weight: bold;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+tr.row-separator > td {
+  height: 12px;
+  border-bottom: 1px solid #000;
+}
+
+td > div.td-container {
+  display: flex;
+}
+
+div.td-container > div.amount-wrapper{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 6px;
+}
+
+div.amount-wrapper > div.prefix-container {
+  text-align: left;
+}
+
+div.amount-wrapper > div.amount-container {
+  justify-content: flex-end;
+  text-align: right;
+  padding-left: 3px;
+}
+
+tr.tax-row > td:not(:first-child) {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+input.input-annual-tax {
+  width: 100%;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
+}
+
+input.input-annual-tax::placeholder {
+  font-weight: 500;
+  color: #c3c3c3;
+}

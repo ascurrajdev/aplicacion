@@ -1,0 +1,8 @@
+  <div class="main-container">
+    <div class="prefix">
+      {{ sign }}&nbsp;
+    </div>
+    <div class="input-container">
+      <input placeholder="0" [(ngModel)]="amount" size='18' type="text" (focusout)="focusOut($event)" appNumberOnly [onEnter]="onEnter" id="{{ html_id }}">
+    </div>
+  </div>

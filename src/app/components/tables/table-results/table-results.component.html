@@ -1,0 +1,145 @@
+<app-alert-info [alert]="alert" (close)="closeAlert()"></app-alert-info>
+<div class="main-container">
+  <div class="row justify-content-center">
+      <table>
+        <thead>
+          <tr>
+            <th>VAN +</th>
+            <th>VAN -</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" [(ngModel)]="van_plus_rate" class="input-rate" placeholder="0.0" appNumericInput [onEnter]="onInputEnter" (focusout)="onInputFocusOut()">&nbsp;%
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="van_minus_rate" class="input-rate" placeholder="0.0" appNumericInput [onEnter]="onInputEnter" (focusout)="onInputFocusOut()">&nbsp;%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <div class="button-container">
+    <button *ngIf="!display_results; else hideResultsButton" mat-raised-button color="primary" (click)="displayResults()">Mostrar Resultados</button>
+    <ng-template #hideResultsButton>
+        <button mat-raised-button color="warn" (click)="hideResults()">Ocultar</button>
+    </ng-template>
+  </div>
+
+  <mat-card *ngIf="display_results">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+          <table>
+            <thead>
+              <tr>
+                <th>Flujo de Caja Anual</th>
+                <th>Ganancia por cada moneda invertida</th>
+                <th>Porcentaje de recuperación de capital</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let af of afs">
+                <td>
+                  <div class="td-container">
+                    <div class="amount-wrapper">
+                      <div class="prefix-container">{{ sign }}</div>
+                      <div class="amount-container">{{ currencyFormat(af.amount, '') }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="td-container">
+                    <div class="amount-wrapper">
+                      <div class="prefix-container">{{ sign }}</div>
+                      <div class="amount-container">{{ currencyFormat(getFlowProfit(af.year), '', ',', '.', 4) }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="td-container">
+                    <div class="amount-wrapper">
+                      <div class="prefix-container"></div>
+                      <div class="amount-container">{{ currencyFormat(getFlowRecovery(af.year), '', ',', '.', 2) }}&nbsp;%</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table>
+            <thead>
+              <tr>
+                <th>Valor actual neto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="td-container">
+                    <div class="amount-wrapper">
+                      <div class="prefix-container">{{ sign }}</div>
+                      <div class="amount-container">{{ currencyFormat(van) }}</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table>
+            <thead>
+              <tr>
+                <th>VAN +</th>
+                <th>VAN -</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span *ngIf="van_plus !== null; vanPlusNull">{{ currencyFormat(van_plus, sign) }}</span>
+                  <ng-template #vanPlusNull>
+                    <span>$&nbsp;0</span>
+                  </ng-template>
+                </td>
+                <td>
+                  <span *ngIf="van_minus !== null; vanMinusNull">{{ currencyFormat(van_minus, sign) }}</span>
+                  <ng-template #vanMinusNull>
+                    <span>$&nbsp;0</span>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table>
+            <thead>
+              <tr>
+                <th>Tasa Interna de Retorno</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="result-cell">
+                  <span *ngIf="tir != null; else nullTir">{{ tir }} %</span>
+                  <ng-template #nullTir>
+                    <span>0.0&nbsp;%</span>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

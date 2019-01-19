@@ -1,0 +1,14 @@
+<div *ngIf="alert.visible" class="main-container">
+    <div class="content">
+      <mat-card>
+        <mat-card-title></mat-card-title>
+        <mat-card-content>
+          <p class="message">{{ alert.message }}</p>
+        </mat-card-content>
+        <mat-card-actions [align]="'end'">
+          <button mat-raised-button (click)="onAccept()">{{ alert.button }}</button>
+          <button mat-raised-button color="warn" (click)="onCancel()">Cancelar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
